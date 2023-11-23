@@ -17,7 +17,7 @@ use bevy::{
             Extent3d, FragmentState, FrontFace, IndexFormat, LoadOp, MultisampleState, Operations,
             PipelineCache, PrimitiveState, RenderPassColorAttachment, RenderPassDescriptor,
             RenderPipelineDescriptor, SamplerBindingType, Shader, ShaderStages, ShaderType,
-            SpecializedRenderPipeline, TextureDimension, TextureFormat, TextureSampleType,
+            SpecializedRenderPipeline, StoreOp, TextureDimension, TextureFormat, TextureSampleType,
             TextureViewDimension, VertexBufferLayout, VertexFormat, VertexState, VertexStepMode,
         },
         renderer::{RenderContext, RenderDevice, RenderQueue},
@@ -345,10 +345,12 @@ impl Node for EguiNode {
                         resolve_target: None,
                         ops: Operations {
                             load: LoadOp::Load,
-                            store: true,
+                            store: StoreOp::Store,
                         },
                     })],
                     depth_stencil_attachment: None,
+                    timestamp_writes: None,
+                    occlusion_query_set: None,
                 });
 
         let Some(pipeline_id) = egui_pipelines.get(&extracted_window.entity) else {

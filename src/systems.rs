@@ -456,7 +456,7 @@ pub fn process_output_system(
         set_icon();
 
         if repaint_after.is_zero() {
-            event.send(RequestRedraw)
+            event.send(RequestRedraw);
         }
 
         #[cfg(feature = "open_url")]
